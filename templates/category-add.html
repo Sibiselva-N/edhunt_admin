@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="robots" content="noindex,nofollow" />
+  <title>EVNZON-Category</title>
+  <!-- Favicon icon -->
+  <link rel="icon" type="image/png" sizes="16x16" href="static/assets/images/favicon.png" />
+  <!-- Custom CSS -->
+  <link href="static/dist/css/style.min.css" rel="stylesheet" />
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <script>
+    function addService() {
+      let cookie = document.cookie
+      let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
+      var name = document.getElementsByName("name")[0].value;
+      var coach = document.getElementsByName("isCoaching")[0].value;
+      var distance = document.getElementsByName("isDistance")[0].value;
+      var indian = document.getElementsByName("isIndian")[0].value;
+      var formData = new FormData();
+      formData.append('name', name);
+      formData.append('coach', coach);
+      formData.append('distance', distance);
+      formData.append('indian', indian);
+      $.ajax({
+        url: "category_add",
+        type: "POST",
+        data: formData,
+        headers: { 'X-CSRFToken': csrfToken },
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          console.log(response);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+          console.error("Error:", errorThrown);
+        }
+
+      });
+      window.location.replace('category');
+    }
+  </script>
+</head>
+
+<body>
+  <!-- ============================================================== -->
+  <!-- Preloader - style you can find in spinners.css -->
+  <!-- ============================================================== -->
+  <div class="preloader">
+    <div class="lds-ripple">
+      <div class="lds-pos"></div>
+      <div class="lds-pos"></div>
+    </div>
+  </div>
+  <!-- ============================================================== -->
+  <!-- Main wrapper - style you can find in pages.scss -->
+  <!-- ============================================================== -->
+  <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+    data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <header class="topbar" data-navbarbg="skin5">
+      <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+        <div class="navbar-header" data-logobg="skin5">
+          <!-- ============================================================== -->
+          <!-- Logo -->
+          <!-- ============================================================== -->
+          <a class="navbar-brand" href="index.html">
+            <!-- Logo icon -->
+            <h2>EVNZONE</h2>
+            <!--End Logo icon -->
+            <!-- Logo text -->
+          </a>
+          <!-- ============================================================== -->
+          <!-- Toggle which is visible on mobile only -->
+          <!-- ============================================================== -->
+          <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i
+              class="ti-menu ti-close"></i></a>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Logo -->
+        <!-- ============================================================== -->
+        <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+          <!-- ============================================================== -->
+          <!-- toggle and nav items -->
+          <!-- ============================================================== -->
+          <ul class="navbar-nav float-start me-auto">
+            <li class="nav-item d-none d-lg-block">
+              <a class="nav-link sidebartoggler waves-effect waves-light" href="javascript:void(0)"
+                data-sidebartype="mini-sidebar"><i class="mdi mdi-menu font-24"></i></a>
+            </li>
+            <!-- ============================================================== -->
+            <!-- Search -->
+            <!-- ============================================================== -->
+            <li class="nav-item search-box">
+              <a class="nav-link waves-effect waves-dark" href="javascript:void(0)"><i
+                  class="mdi mdi-magnify fs-4"></i></a>
+              <form class="app-search position-absolute">
+                <input type="text" class="form-control" placeholder="Search &amp; enter" />
+                <a class="srh-btn"><i class="mdi mdi-window-close"></i></a>
+              </form>
+            </li>
+          </ul>
+          <!-- ============================================================== -->
+          <!-- User profile and search -->
+          <!-- ============================================================== -->
+          <li class="nav-item dropdown">
+            <a class="
+                    nav-link
+                    dropdown-toggle
+                    text-muted
+                    waves-effect waves-dark
+                    pro-pic
+                  " href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="static/assets/images/users/1.jpg" alt="user" class="rounded-circle" width="31" />
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end user-dd animated" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="javascript:void(0)"><i class="mdi mdi-account me-1 ms-1"></i> My
+                Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-power-off me-1 ms-1"></i> Logout</a>
+            </ul>
+          </li>
+          <!-- ============================================================== -->
+          <!-- User profile and search -->
+          <!-- ============================================================== -->
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Left Sidebar - style you can find in sidebar.scss  -->
+    <!-- ============================================================== -->
+    <aside class="left-sidebar" data-sidebarbg="skin5">
+      <!-- Sidebar scroll-->
+      <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+          <ul id="sidebarnav" class="pt-4">
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="dashboard" aria-expanded="false"><i
+                  class="mdi mdi-view-dashboard"></i><span class="hide-menu">Dashboard</span></a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="category" aria-expanded="false"><i
+                  class="mdi mdi-chart-bar"></i><span class="hide-menu">Manage Categories</span></a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="service" aria-expanded="false"><i
+                  class="mdi mdi-chart-bubble"></i><span class="hide-menu">Manage Services</span></a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="banner" aria-expanded="false"><i
+                  class="mdi mdi-relative-scale"></i><span class="hide-menu">Manage Banner</span></a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="district" aria-expanded="false"><i
+                  class="mdi mdi-pencil"></i><span class="hide-menu">Manage Districts</span></a>
+            </li>
+
+            <li class="sidebar-item">
+              <a class="sidebar-link waves-effect waves-dark sidebar-link" href="users" aria-expanded="false"><i
+                  class="mdi mdi-pencil"></i><span class="hide-menu">Manage Users</span></a>
+            </li>
+
+          </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+      </div>
+      <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper">
+      <div class="page-breadcrumb">
+        <div class="row">
+          <div class="col-12 d-flex no-block align-items-center">
+            <h4 class="page-title">Category Add</h4>
+            <div class="ms-auto text-end">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Library
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <!-- <h5 class="card-title">Dropdown Buttons</h5> -->
+                <div class="bd-example">
+
+                  <!-- Catergory Add-->
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="card">
+                        <div class="form-horizontal">
+                          <div class="card-body">
+                            <h4 class="card-title" style="padding-bottom: 12px;">Manage Category Add</h4>
+                            <div class="form-group row">
+                              <label for="fname" class="col-sm-3 text-end control-label col-form-label">Category
+                                Name</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="categoryname" name="name"
+                                  placeholder="Category Name Here" />
+                              </div>
+                            </div>
+                            <div class="form-group row">
+                              <label for="isCoaching" class="col-sm-3 text-end control-label col-form-label">Is
+                                Coaching</label>
+                              <div class="col-sm-9">
+                                <input type="checkbox" id="isCoaching" name="isCoaching" value="true" placeholder="isC">
+
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="isDistance" class="col-sm-3 text-end control-label col-form-label">Is
+                                Distance</label>
+                              <div class="col-sm-9">
+                                <input type="checkbox" id="isDistance" name="isDistance" value="true" placeholder="isC">
+
+                              </div>
+                            </div>
+
+                            <div class="form-group row">
+                              <label for="isIndian" class="col-sm-3 text-end control-label col-form-label">Is
+                                Indian</label>
+                              <div class="col-sm-9">
+                                <input type="checkbox" id="isIndian" name="isIndian" value="true" placeholder="isC">
+
+                              </div>
+                            </div>
+
+
+                          </div>
+
+                          <div class="border-top">
+                            <div class="card-body" style="float: right;">
+                              <button type="button" class="btn btn-primary" onclick="addService()">
+                                Submit
+                              </button>
+                              <a href="category"> <button type="button" class="btn btn-secondary">
+                                  Cancel
+                                </button> </a>
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--Category Add End-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer text-center">
+        All Rights Reserved by Matrix-admin. Designed and Developed by
+        <a href="https://www.wrappixel.com">WrapPixel</a>.
+      </footer>
+    </div>
+  </div>
+  <script src="static/assets/libs/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap tether Core JavaScript -->
+  <script src="static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- slimscrollbar scrollbar JavaScript -->
+  <script src="static/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+  <script src="static/assets/extra-libs/sparkline/sparkline.js"></script>
+  <!--Wave Effects -->
+  <script src="static/dist/js/waves.js"></script>
+  <!--Menu sidebar -->
+  <script src="static/dist/js/sidebarmenu.js"></script>
+  <!--Custom JavaScript -->
+  <script src="static/dist/js/custom.min.js"></script>
+</body>
+
+</html>

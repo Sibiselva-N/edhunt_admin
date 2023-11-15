@@ -1,0 +1,82 @@
+.table-img {
+    width: 160px; /* Set the width of the image */
+    height: 100px; /* Auto-adjust the height to maintain aspect ratio */
+}
+
+
+.edit-icon {
+    color: blue; /* Set the edit icon to blue */
+    margin-right: 10px; /* Add some space to the right of the edit icon */
+  }
+  
+  .delete-icon {
+    color: red; /* Set the delete icon to red */
+  }
+
+  .table-container {
+    display: flex;
+    align-items: center;
+    padding-bottom:12px;
+  }
+  
+  .table-title {
+    flex: 1;
+    padding:2px;
+    font-size: 5px;
+  }
+  
+  .table-font {
+    font-size: 15px;
+  }
+  .blue-button {
+    background: blue;
+    color: white;
+    padding: 10px 20px;
+  }
+
+  .popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 50px;
+    text-align: center;
+}
+
+/* CSS for the buttons */
+.popup-buttons {
+    margin-top: 20px;
+}
+
+.container {
+  text-align: left; /* Align the content to the left */
+}
+
+.border-top {
+  display: flex; /* Make the children elements flex items */
+  justify-content: flex-start; /* Align items to the left within the flex container */
+  align-items: center; /* Vertically center the items if needed */
+}
+
+.card-body {
+  margin-right: 10px; /* Add some spacing between the buttons */
+}
+.add-submit-align{
+
+  float:right;
+}
+
+.card-title {
+  padding-bottom: 8px;
+}
