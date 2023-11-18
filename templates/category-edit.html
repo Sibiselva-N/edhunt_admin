@@ -29,9 +29,9 @@
     let cookie = document.cookie
     let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
    var name = document.getElementsByName("name")[0].value;
-    var coach = document.getElementsByName("isCoaching")[0].value;
-    var distance = document.getElementsByName("isDistance")[0].value;
-    var indian = document.getElementsByName("isIndian")[0].value;
+    var coach = document.getElementsByName("isCoaching")[0].checked;
+    var distance = document.getElementsByName("isDistance")[0].checked;
+    var indian = document.getElementsByName("isIndian")[0].checked;
     var id ="{{ cat_id }}";
     var formData = new FormData();
         formData.append('name', name);

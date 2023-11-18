@@ -301,7 +301,7 @@ def add_banner(request):
             db = firestore.client()
             d = db.collection('banner').document()
             d.set({
-                "id":d.id,
+                "id": d.id,
                 "url": url
             })
             return HttpResponseRedirect('banner')
@@ -327,7 +327,7 @@ def edit_banner(request):
             db = firestore.client()
             db.collection('banner').document(data['id']).update({
                 "url": url,
-                "id":data['id']
+                "id": data['id']
             })
             return HttpResponseRedirect('banner')
         else:
@@ -430,8 +430,10 @@ def add_grade(request):
         data = request.POST
         if 'name' in data:
             db = firestore.client()
-            db.collection('grade').document().set({
-                "name": data['name']
+            d = db.collection('grade').document()
+            d.set({
+                "name": data['name'],
+                "id": d.id,
             })
             return HttpResponseRedirect('grade')
         else:
