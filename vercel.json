@@ -1,19 +1,23 @@
 {
-   "builds": [
+  "version": 2,
+  "builds": [
     {
       "src": "edhunt/wsgi.py",
       "use": "@vercel/python",
-      "config": {"maxLambdaSize":  "15mb", "runtime": "python3.9"}
-    }
-     ,
-      {
-        "src": "build.sh",
-        "use": "@vercel/static-build",
-        "config": { "distDir": "staticfiles_build" }
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9",
+        "outputDirectory": "staticfiles_build"
+      }
+    },
+    {
+      "src": "edhunt/build.sh",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "staticfiles_build" }
     }
   ],
   "routes": [
-     {
+    {
       "src": "/static/(.*)",
       "dest": "/static/$1"
     },
@@ -21,7 +25,5 @@
       "src": "/(.*)",
       "dest": "edhunt/wsgi.py"
     }
-  ],
-      "outputDirectory": "staticfiles_build"
-
+  ]
 }
