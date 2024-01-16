@@ -5,16 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="keywords"
-      content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template"
-    />
-    <meta
-      name="description"
-      content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
-    />
+
     <meta name="robots" content="noindex,nofollow" />
-    <title>EVNZON-Users</title>
+    <title>EDHUNT-USER</title>
     <!-- Favicon icon -->
     <link
       rel="icon"
@@ -22,26 +15,48 @@
       sizes="16x16"
       href="static/assets/images/favicon.png"
     />
-    <!-- Custom CSS -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="static/assets/extra-libs/multicheck/multicheck.css"
-    />
-    <link
-      href="static/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
-      rel="stylesheet"
-    />
-    <link href="static/dist/css/style.min.css" rel="stylesheet" />
-    <link href="static/dist/css/index.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link
+    rel="stylesheet"
+    type="text/css"
+    href="static/assets/libs/select2/dist/css/select2.min.css"
+  />
+    <!-- Custom CSS -->
+    <link href="static/dist/css/style.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+         <script>
+    function editCity (){
+    let cookie = document.cookie
+    let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
+    var name = document.getElementsByName("name")[0].value;
+    var id ="{{ user_id }}";
+    var formData = new FormData();
+    formData.append('coins', name);
+    formData.append('id', id);
+         $.ajax({
+      url: "user_edit",
+      type: "POST",
+      data: formData,
+      headers: { 'X-CSRFToken': csrfToken },
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error:", errorThrown);
+      }
+
+    });
+    window.location.replace('users');
+    }
+    </script>
   </head>
 
   <body>
@@ -77,12 +92,10 @@
             <!-- ============================================================== -->
             <a class="navbar-brand" href="index.html">
               <!-- Logo icon -->
-             
               <h2>EVNZONE</h2>
+              <!--End Logo icon -->
+              <!-- Logo text -->
             </a>
-            <!-- ============================================================== -->
-            <!-- End Logo -->
-            <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- Toggle which is visible on mobile only -->
             <!-- ============================================================== -->
@@ -113,7 +126,6 @@
                 ></a>
               </li>
               <!-- ============================================================== -->
-              <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
               <li class="nav-item search-box">
@@ -132,14 +144,6 @@
                 </form>
               </li>
             </ul>
-            <!-- ============================================================== -->
-            <!-- Right side toggle and nav items -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav float-end">
-              <!-- ============================================================== -->
-             
-              
-
               <!-- ============================================================== -->
               <!-- User profile and search -->
               <!-- ============================================================== -->
@@ -172,12 +176,10 @@
                   <a class="dropdown-item" href="javascript:void(0)"
                     ><i class="mdi mdi-account me-1 ms-1"></i> My Profile</a
                   >
-                 
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:void(0)"
                     ><i class="fa fa-power-off me-1 ms-1"></i> Logout</a
                   >
-                
                 </ul>
               </li>
               <!-- ============================================================== -->
@@ -208,6 +210,7 @@
                   ><span class="hide-menu">Dashboard</span></a
                 >
               </li>
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -226,7 +229,7 @@
                   ><span class="hide-menu">Manage Services</span></a
                 >
               </li>
-             
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -246,15 +249,7 @@
                   ><span class="hide-menu">Manage Districts</span></a
                 >
               </li>
-  <li class="sidebar-item">
-                <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="grade"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-pencil"></i
-                  ><span class="hide-menu">Manage Grade</span></a
-                >
-              </li>
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -264,9 +259,12 @@
                   ><span class="hide-menu">Manage Users</span></a
                 >
               </li>
-              
-            
-            
+
+
+
+
+
+
             </ul>
           </nav>
           <!-- End Sidebar navigation -->
@@ -286,11 +284,11 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Users</h4>
+              <h4 class="page-title">User Edit</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
                       Library
                     </li>
@@ -310,75 +308,66 @@
           <!-- ============================================================== -->
           <!-- Start Page Content -->
           <!-- ============================================================== -->
+
+          <!-- drop down -->
           <div class="row">
             <div class="col-12">
-
               <div class="card">
                 <div class="card-body">
-                  <!-- <h5 class="card-title">Basic Datatable</h5> -->
-                  <div class="table-container">
-                    <div class="table-title">
-                     <h2 class="table-font">Users List</h2>
-                    </div>
-                    <div>
-                      <a href="users-add.html"> <button type="button" class="btn btn-primary">
-                            Add
-                          </button> </a>
-                    </div>
-                  </div>
-                
-                  <div class="table-responsive">
-                    <table
-                      id="zero_config"
-                      class="table table-striped table-bordered"
-                    >
-                      <thead>
-                        <tr>
+                  <!-- <h5 class="card-title">Dropdown Buttons</h5> -->
+                  <div class="bd-example">
 
-                          <th>Mobile Number</th>
-                          <th>Coins</th>
+                    <!-- District Edit-->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <div class="card">
+                            <form class="form-horizontal">
+                              <div class="card-body">
+                                <h4 class="card-title" style="padding-bottom: 12px;">Manage User Edit</h4>
 
-                          <th>Update Coins</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      {% for i in user_list %}
-                        <tr>
-
-                          <td>{{ i.phone }}</td>
-                              <td>{{ i.coins }}</td>
-                          <td>
-                                      <a href="{% url 'user_edit' %}?id={{ i.uid }}"><i class="fas fa-edit edit-icon" title="Edit"></i></a>
-                          </td>
+                              <div class="form-group row">
+                                  <label
+                                    for="fname"
+                                    class="col-sm-3 text-end control-label col-form-label"
+                                    >User Coins</label
+                                  >
+                                  <div class="col-sm-9">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="categoryname"
+                                      name="name"
+                                      value="{{ user.coins }}"
+                                      placeholder="User Coins Here"
+                                    />
+                                  </div>
+                                </div>
 
 
-                        </tr>
-                      {% endfor %}
 
-                          
-                      </tbody>
-                    </table>
+                            </div>
+
+                              <div class="border-top">
+                                <div class="card-body" style="float: right;">
+                                  <button type="button" class="btn btn-primary" onclick="editCity()">
+                                    Submit
+                                  </button>
+                                 <a href="users"> <button type="button" class="btn btn-secondary">
+                                    Cancel
+                                  </button> </a>
+                                </div>
+                              </div>
+
+                            </form>
+                          </div>
+                        </div>
+                        </div>
+                    <!--District Edit End-->
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-              <!-- Popup for confirmation -->
-    <div id="confirmationPopup" class="popup">
-      <div class="popup-content">
-          <p>Are you sure you want to delete?</p>
-          <div class="popup-buttons">
-              <button type="button" class="btn btn-primary" onclick="confirmDelete()">
-                OK
-              </button>
-              <button type="button" class="btn btn-danger text-white" onclick="cancelDelete()">
-                Cancel
-              </button>
-          </div>
-      </div>
-  </div>
-
           <!-- ============================================================== -->
           <!-- End PAge Content -->
           <!-- ============================================================== -->
@@ -426,36 +415,49 @@
     <script src="static/dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="static/dist/js/custom.min.js"></script>
-    <!-- this page js -->
-    <script src="static/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-    <script src="static/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-    <script src="static/assets/extra-libs/DataTables/datatables.min.js"></script>
+
+    <script src="static/assets/libs/select2/dist/js/select2.full.min.js"></script>
+    <script src="static/assets/libs/select2/dist/js/select2.min.js"></script>
     <script>
+        //***********************************//
+        // For select 2
+        //***********************************//
+        $(".select2").select2();
 
-      
-      /****************************************
-       *       Basic Table                   *
-       ****************************************/
-      $("#zero_config").DataTable();
-    </script>
+        /*colorpicker*/
+        $(".demo").each(function () {
+          //
+          // Dear reader, it's actually very easy to initialize MiniColors. For example:
+          //
+          //  $(selector).minicolors();
+          //
+          // The way I've done it below is just for the demo, so don't get confused
+          // by it. Also, data- attributes aren't supported at this time...they're
+          // only used for this demo.
+          //
+          $(this).minicolors({
+            control: $(this).attr("data-control") || "hue",
+            position: $(this).attr("data-position") || "bottom left",
 
-<script>
-  function showConfirmationPopup() {
-      var popup = document.getElementById("confirmationPopup");
-      popup.style.display = "block";
-  }
-
-  function cancelDelete() {
-      var popup = document.getElementById("confirmationPopup");
-      popup.style.display = "none";
-  }
-
-  function confirmDelete() {
-      // Handle the delete action here
-      var popup = document.getElementById("confirmationPopup");
-      popup.style.display = "none";
-  }
-</script>
-
+            change: function (value, opacity) {
+              if (!value) return;
+              if (opacity) value += ", " + opacity;
+              if (typeof console === "object") {
+                console.log(value);
+              }
+            },
+            theme: "bootstrap",
+          });
+        });
+        /*datwpicker*/
+        jQuery(".mydatepicker").datepicker();
+        jQuery("#datepicker-autoclose").datepicker({
+          autoclose: true,
+          todayHighlight: true,
+        });
+        var quill = new Quill("#editor", {
+          theme: "snow",
+        });
+      </script>
   </body>
 </html>

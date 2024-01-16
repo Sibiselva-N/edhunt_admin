@@ -51,6 +51,19 @@
       var number = document.getElementsByName("serviceNumber")[0].value;
       var pdf = document.getElementsByName("pdf")[0].files;
 
+          var ar = [];
+        // Get all the input elements with names "width[]" and "height[]"
+    var widthInputs = document.getElementsByName("width[]");
+        // Create arrays to store the values of width and height
+    var widthValues = [];
+
+    // Loop through width inputs and height inputs
+    for (var i = 0; i < widthInputs.length; i++) {
+        widthValues.push(widthInputs[i].value);
+  ar.push(  widthInputs[i].value  );
+
+    }
+
 
 
       var formData = new FormData();
@@ -74,6 +87,8 @@
       formData.append("university", univer);
       formData.append("name", collegeName);
       formData.append("number", number);
+          formData.append("urls",JSON.stringify(ar));
+
 
 
       $.ajax({
@@ -438,6 +453,16 @@
                                   accept="application/pdf,application/vnd.ms-excel" />
                               </div>
                             </div>
+                                  <div class="col-sm-9">
+                                      <div id="dimensionContainer">
+                                        <!-- Initial input boxes for width and height -->
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" placeholder="Video ID" name="width[]" />
+                                             <button type="button" class="btn btn-success"  onclick="toggleInput(this)">Add</button>
+                                        </div>
+                                    </div>
+
+                                  </div>
 
 
                             <div class="border-top">
@@ -585,6 +610,32 @@
       }
     }
   </script>
+<script>
+  function toggleInput(button) {
+    var container = document.getElementById('dimensionContainer');
+    var lastRow = container.lastElementChild;
+    var newInput = lastRow.cloneNode(true);
+
+    if (button.textContent === 'Add') {
+      // Adding a new input row
+       clearInputValues(newInput);
+
+      container.appendChild(newInput);
+      button.textContent = 'Remove';
+    } else {
+      // Removing the last input row
+      container.removeChild(lastRow);
+    }
+  }
+
+  function clearInputValues(element) {
+  // Select all input elements and set their values to an empty string
+  var inputElements = element.querySelectorAll('input[type="text"]');
+  inputElements.forEach(function(input) {
+    input.value = '';
+  });
+}
+</script>
 </body>
 
 </html>

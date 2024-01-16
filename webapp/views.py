@@ -121,6 +121,8 @@ def add_service(request):
         for key, value in data_dict.items():
             if len(value) == 1 and value[0] == "[]":
                 data_dict[key] = []
+            elif key == "urls":
+                data_dict[key] = json.loads(value[0])
             else:
                 data_dict[key] = value[0]
         photos = request.FILES.getlist('image')
@@ -156,7 +158,8 @@ def add_service(request):
                 "name": data['name'],
                 "number": data['number'],
                 "pdf_url": pdf_url,
-                "id": d.id
+                "id": d.id,
+                "urls": data['urls']
             })
             return HttpResponseRedirect('service')
         else:
@@ -194,6 +197,8 @@ def edit_service(request):
                 result = json.loads(value[0])
                 result_list = [str(item) for item in result]
                 data_dict[key] = result_list
+            elif key == "urls":
+                data_dict[key] = json.loads(value[0])
             else:
                 data_dict[key] = value[0]
         photos = request.FILES.getlist('image')
@@ -234,7 +239,8 @@ def edit_service(request):
                 "university": data['university'],
                 "name": data['name'],
                 "number": data['number'],
-                "id": data['id']
+                "id": data['id'],
+                "urls": data['urls']
             })
             return HttpResponseRedirect('service')
         else:
@@ -398,6 +404,26 @@ def edit_district(request):
         details = db.collection('district').document(city_id).get()
         cat = details.to_dict()
     return render(request, 'district-edit.html', {"city": cat, "city_id": city_id})
+
+
+def edit_user(request):
+    if request.method == "POST":
+        data = request.POST
+        if 'coins' in data and 'id' in data:
+            db = firestore.client()
+            db.collection('users').document(data['id']).update({
+
+                "coins": data['coins']
+            })
+            return HttpResponseRedirect('users')
+        else:
+            return HttpResponseRedirect('users')
+    else:
+        city_id = request.GET.get('id', "")
+        db = firestore.client()
+        details = db.collection('users').document(city_id).get()
+        cat = details.to_dict()
+    return render(request, 'user_edit.html', {"user": cat, "user_id": city_id})
 
 
 def delete_district(request):
