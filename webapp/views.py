@@ -128,6 +128,7 @@ def add_service(request):
         photos = request.FILES.getlist('image')
         pdf = request.FILES.getlist('pdf_url')
         data = data_dict
+        print(data)
         if 'about' in data and 'category_id' in data and 'count' in data and "district_id" in data and "grade_id" in data and "isAutonomous" in data and "isCoaching" in data and "isDistance" in data and "isIndian" in data and "name" in data and "number" in data and 'university' in data:
             url_list = []
             pdf_url = ""
