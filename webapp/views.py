@@ -117,37 +117,41 @@ def show_service(request):
 def add_service(request):
     data = request.POST
     if request.method == "POST":
+        print("1st if")
         data_dict = dict(data)
         for key, value in data_dict.items():
             if len(value) == 1 and value[0] == "[]":
+                print("2st if")
                 data_dict[key] = []
             elif key == "urls":
                 data_dict[key] = json.loads(value[0])
             else:
                 data_dict[key] = value[0]
         photos = request.FILES.getlist('image')
-        pdf = request.FILES.getlist('pdf_url')
+        # pdf = request.FILES.getlist('pdf_url')
         data = data_dict
         print(data)
-        if 'about' in data and 'category_id' in data and 'count' in data and "district_id" in data and "grade_id" in data and "isAutonomous" in data and "isCoaching" in data and "isDistance" in data and "isIndian" in data and "name" in data and "number" in data and 'university' in data:
+        if 'about' in data and 'category_id' in data and "district_id" in data and "grade_id" in data and "isAutonomous" in data and "isCoaching" in data and "isDistance" in data and "isIndian" in data and "name" in data and "number" in data and 'university' in data:
+            print("3st if")
             url_list = []
             pdf_url = ""
             for i in photos:
+                print("4st if")
                 blob = bucket.blob(i.name)
                 blob.upload_from_file(i.file)
                 blob.make_public()
                 url_list.append(blob.public_url)
-            if len(pdf) == 1:
-                blob = bucket.blob(pdf[0].name)
-                blob.upload_from_file(pdf[0].file)
-                blob.make_public()
-                pdf_url = blob.public_url
+            # if len(pdf) == 1:
+            #     blob = bucket.blob(pdf[0].name)
+            #     blob.upload_from_file(pdf[0].file)
+            #     blob.make_public()
+            #     pdf_url = blob.public_url
             db = firestore.client()
             d = db.collection('indian_college').document()
             d.set({
                 "about": data['about'],
                 "category_id": data['category_id'],
-                "count": int(data['count']),
+               
                 "image": url_list,
                 "district_id": data['district_id'],
                 "grade_id": data['grade_id'],
@@ -158,13 +162,13 @@ def add_service(request):
                 "university": data['university'],
                 "name": data['name'],
                 "number": data['number'],
-                "pdf_url": pdf_url,
+               
                 "id": d.id,
                 "urls": data['urls']
             })
             return HttpResponseRedirect('service')
         else:
-            return ""
+            return HttpResponseRedirect('service')
     fs = firestore.client()
     cat_doc = fs.collection("indian_category").get()
     category = []
@@ -272,18 +276,25 @@ def edit_service(request):
         })
 
 
+# def delete_service(request):
+#     data = request.POST
+#     print(data)
+#     if request.method == "POST":
+#         if 'id' in data and 'service_name' in data:
+#             db = firestore.client()
+#             db.collection('services').document(data['service_name']).set({"d": "d"})
+#             db.collection('services').document(data['service_name']).collection(data['service_name']).document(
+#                 data['id']).delete()
+#             return HttpResponseRedirect('service')
+#         else:
+#             return ""
 def delete_service(request):
     data = request.POST
-    if request.method == "POST":
-        if 'id' in data and 'service_name' in data:
-            db = firestore.client()
-            db.collection('services').document(data['service_name']).set({"d": "d"})
-            db.collection('services').document(data['service_name']).collection(data['service_name']).document(
-                data['id']).delete()
-            return HttpResponseRedirect('service')
-        else:
-            return ""
-
+    cat_id = data['id']
+    db = firestore.client()
+    db.collection('indian_college').document(cat_id).delete()
+    return HttpResponseRedirect('service')
+    
 
 def show_banner(request):
     fs = firestore.client()

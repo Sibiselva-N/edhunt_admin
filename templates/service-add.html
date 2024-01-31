@@ -17,19 +17,15 @@
 
   <!-- Custom CSS -->
   <link href="static/dist/css/style.min.css" rel="stylesheet" />
-       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
-   <script>
-    function addService() {
+  <script>    function addService() {
       let cookie = document.cookie
       let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
-
-
-
       var collegeName = document.getElementsByName("name")[0].value;
       var about = document.getElementsByName("about")[0].value;
-      var count = document.getElementsByName("count")[0].value;
+      // var count = document.getElementsByName("count")[0].value;
       var catId = "";
       var cityId = "";
       var gradeId = "";
@@ -46,20 +42,20 @@
       var indian = document.getElementsByName("isIndian")[0].checked;
       var univer = document.getElementsByName("university")[0].value;
       var number = document.getElementsByName("serviceNumber")[0].value;
-      var pdf = document.getElementsByName("pdf")[0].files;
+      // var pdf = document.getElementsByName("pdf")[0].files;
 
-          var ar = [];
-        // Get all the input elements with names "width[]" and "height[]"
-    var widthInputs = document.getElementsByName("width[]");
-        // Create arrays to store the values of width and height
-    var widthValues = [];
+      var ar = [];
+      // Get all the input elements with names "width[]" and "height[]"
+      var widthInputs = document.getElementsByName("width[]");
+      // Create arrays to store the values of width and height
+      var widthValues = [];
 
-    // Loop through width inputs and height inputs
-    for (var i = 0; i < widthInputs.length; i++) {
+      // Loop through width inputs and height inputs
+      for (var i = 0; i < widthInputs.length; i++) {
         widthValues.push(widthInputs[i].value);
-  ar.push(  widthInputs[i].value  );
+        ar.push(widthInputs[i].value);
 
-    }
+      }
 
 
 
@@ -70,11 +66,11 @@
       for (var i = 0; i < images.length; i++) {
         formData.append("image", images[i], images[i].name);
       }
-      for (var i = 0; i < pdf.length; i++) {
-        formData.append("pdf_url", pdf[i], pdf[i].name);
-      }
+      // for (var i = 0; i < pdf.length; i++) {
+      //   formData.append("pdf_url", pdf[i], pdf[i].name);
+      // }
 
-      formData.append("count", count);
+      // formData.append("count", count);
       formData.append("district_id", cityId);
       formData.append("grade_id", gradeId);
       formData.append("isAutonomous", auton);
@@ -84,7 +80,7 @@
       formData.append("university", univer);
       formData.append("name", collegeName);
       formData.append("number", number);
-          formData.append("urls",JSON.stringify(ar));
+      formData.append("urls", JSON.stringify(ar));
 
 
 
@@ -108,9 +104,10 @@
 
 
 
-
+      console.log("start");
 
     }
+
   </script>
 
 </head>
@@ -456,29 +453,29 @@
                                 <input type="file" class="custom-file-input" id="pdf" required name="pdf"
                                   accept="application/pdf,application/vnd.ms-excel" />
                               </div> -->
-                            </div>
-                                  <div class="col-sm-9">
-                                      <div id="dimensionContainer">
-                                        <!-- Initial input boxes for width and height -->
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="Video ID" name="width[]" />
-                                             <button type="button" class="btn btn-success"  onclick="toggleInput(this)">Add</button>
-                                        </div>
-                                    </div>
-
-                                  </div>
-
-
-                            <div class="border-top">
-                              <div class="card-body" style="float: right;">
-                                <button type="button" class="btn btn-primary" onclick="addService()">
-                                  Submit
-                                </button>
-                                <a href="service"> <button type="button" class="btn btn-secondary">
-                                    Cancel
-                                  </button> </a>
+                          </div>
+                          <div class="col-sm-9">
+                            <div id="dimensionContainer">
+                              <!-- Initial input boxes for width and height -->
+                              <div class="input-group mb-3">
+                                <input type="text" class="form-control" placeholder="Video ID" name="width[]" />
+                                <button type="button" class="btn btn-success" onclick="toggleInput(this)">Add</button>
                               </div>
                             </div>
+
+                          </div>
+
+
+                          <div class="border-top">
+                            <div class="card-body" style="float: right;">
+                              <button type="button" class="btn btn-primary" onclick="addService()">
+                                Submit
+                              </button>
+                              <a href="service"> <button type="button" class="btn btn-secondary">
+                                  Cancel
+                                </button> </a>
+                            </div>
+                          </div>
 
                         </form>
                       </div>
@@ -614,32 +611,32 @@
       }
     }
   </script>
-<script>
-  function toggleInput(button) {
-    var container = document.getElementById('dimensionContainer');
-    var lastRow = container.lastElementChild;
-    var newInput = lastRow.cloneNode(true);
+  <script>
+    function toggleInput(button) {
+      var container = document.getElementById('dimensionContainer');
+      var lastRow = container.lastElementChild;
+      var newInput = lastRow.cloneNode(true);
 
-    if (button.textContent === 'Add') {
-      // Adding a new input row
-       clearInputValues(newInput);
+      if (button.textContent === 'Add') {
+        // Adding a new input row
+        clearInputValues(newInput);
 
-      container.appendChild(newInput);
-      button.textContent = 'Remove';
-    } else {
-      // Removing the last input row
-      container.removeChild(lastRow);
+        container.appendChild(newInput);
+        button.textContent = 'Remove';
+      } else {
+        // Removing the last input row
+        container.removeChild(lastRow);
+      }
     }
-  }
 
-  function clearInputValues(element) {
-  // Select all input elements and set their values to an empty string
-  var inputElements = element.querySelectorAll('input[type="text"]');
-  inputElements.forEach(function(input) {
-    input.value = '';
-  });
-}
-</script>
+    function clearInputValues(element) {
+      // Select all input elements and set their values to an empty string
+      var inputElements = element.querySelectorAll('input[type="text"]');
+      inputElements.forEach(function (input) {
+        input.value = '';
+      });
+    }
+  </script>
 </body>
 
 </html>
