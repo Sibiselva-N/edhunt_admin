@@ -178,7 +178,9 @@ def add_service(request):
         category.append(i.to_dict())
     city_doc = fs.collection('district').get()
     for i in city_doc:
-        cities.append(i.to_dict())
+        dt = i.to_dict()
+        dt['id'] = i.id
+        cities.append(dt)
     grade_doc = fs.collection('grade').get()
     for i in grade_doc:
         grade.append(i.to_dict())
@@ -209,7 +211,7 @@ def edit_service(request):
         photos = request.FILES.getlist('image')
         pdf = request.FILES.getlist('pdf_url')
         data = data_dict
-        if 'about' in data and 'category_id' in data and 'count' in data and "district_id" in data and "grade_id" in data and "isAutonomous" in data and "isCoaching" in data and "isDistance" in data and "isIndian" in data and "name" in data and "number" in data and 'university' in data and 'id' in data and 'old_url' in data:
+        if 'about' in data and 'category_id' in data and "district_id" in data and "grade_id" in data and "isAutonomous" in data and "isCoaching" in data and "isDistance" in data and "isIndian" in data and "name" in data and "number" in data and 'university' in data and 'id' in data and 'old_url' in data:
             url_list = []
             for i in data['old_url']:
                 if type(i) is str:
@@ -233,7 +235,6 @@ def edit_service(request):
             db.collection('indian_college').document(data['id']).update({
                 "about": data['about'],
                 "category_id": data['category_id'],
-                "count": int(data['count']),
                 "image": url_list,
                 "district_id": data['district_id'],
                 "grade_id": data['grade_id'],
@@ -262,7 +263,9 @@ def edit_service(request):
             category.append(i.to_dict())
         city_doc = db.collection('district').get()
         for i in city_doc:
-            cities.append(i.to_dict())
+            dt = i.to_dict()
+            dt['id'] = i.id
+            cities.append(dt)
         grade_doc = db.collection('grade').get()
         for i in grade_doc:
             grade.append(i.to_dict())

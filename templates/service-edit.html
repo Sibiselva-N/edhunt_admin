@@ -35,7 +35,6 @@
 
       var collegeName = document.getElementsByName("name")[0].value;
       var about = document.getElementsByName("about")[0].value;
-      var count = document.getElementsByName("count")[0].value;
       var catId = "";
       var cityId = "";
       var gradeId = "";
@@ -53,8 +52,6 @@
       var indian = document.getElementsByName("isIndian")[0].checked;
       var univer = document.getElementsByName("university")[0].value;
       var number = document.getElementsByName("serviceNumber")[0].value;
-      var pdf = document.getElementsByName("pdf")[0].files;
-
 
           var ar = [];
         // Get all the input elements with names "width[]" and "height[]"
@@ -77,11 +74,7 @@
       for (var i = 0; i < images.length; i++) {
         formData.append("image", images[i], images[i].name);
       }
-      for (var i = 0; i < pdf.length; i++) {
-        formData.append("pdf_url", pdf[i], pdf[i].name);
-      }
 
-      formData.append("count", count);
       formData.append("district_id", cityId);
       formData.append("grade_id", gradeId);
       formData.append("isAutonomous", auton);
