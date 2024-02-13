@@ -2,7 +2,7 @@ from django.urls import path
 from .views import show_dashboard, show_category, show_service, show_banner, show_district, edit_district, add_district, \
     show_user, \
     add_service, edit_service, add_category, edit_category, delete_category, add_banner, edit_banner, delete_service, \
-    delete_banner, delete_district, delete_grade, edit_grade, add_grade, show_grade, edit_user
+    delete_banner, delete_district, delete_grade, edit_grade, add_grade, show_grade, edit_user, delete_course, add_course
 
 urlpatterns = [
     path('dashboard', show_dashboard),
@@ -29,5 +29,11 @@ urlpatterns = [
     path('user_edit', edit_user, name='user_edit'),
     path('service_add', add_service),
     path('service_edit', edit_service, name='service_edit'),
-    path('service_delete', delete_service, name='service_delete')
+    path('service_delete', delete_service, name='service_delete'),
+
+
+    path('course_delete', delete_course, name='course_delete'),
+    path('course_add', add_course),
+
+
 ]

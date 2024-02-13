@@ -25,7 +25,71 @@ bucket = storage.bucket()
 
 
 def show_dashboard(request):
-    return render(request, 'index.html')
+    fs = firestore.client()
+    courses_doc = fs.collection("courses").get()
+    courses = []
+    cats = []
+    for i in courses_doc:
+        cats.append(i.id)
+        datas = fs.collection("courses").document(i.id).collection(i.id).get()
+        for j in datas:
+            d = j.to_dict()
+            d['cat'] = i.id
+            d['id'] = j.id
+            courses.append(d)
+    return render(request, 'index.html', {"course_list": courses})
+
+
+def delete_course(request):
+    data = request.POST
+    cat_id = data['id']
+    cat = data['cat']
+    db = firestore.client()
+    db.collection('courses').document(cat).collection(cat).document(cat_id).delete()
+    courses_doc = db.collection("courses").get()
+    courses = []
+    cats = []
+    for i in courses_doc:
+        cats.append(i.id)
+        datas = db.collection("courses").document(i.id).collection(i.id).get()
+        for j in datas:
+            d = j.to_dict()
+            d['cat'] = i.id
+            courses.append(d)
+    return render(request, 'index.html', {"course_list": courses})
+
+
+def add_course(request):
+    if request.method == "POST":
+        data = request.POST
+        cat = data['cat']
+        files = request.FILES.getlist('image')
+        if len(files) == 1:
+            ima = files[0]
+            blob = bucket.blob(ima.name + str(time.time_ns()) + ".pdf")
+            blob.upload_from_file(ima.file)
+            blob.make_public()
+            url = blob.public_url
+            db = firestore.client()
+            d = db.collection('courses').document(cat).collection(cat).document()
+            d.set({
+                "id": d.id,
+                "url": url,
+                "name": data['name']
+            })
+            return HttpResponseRedirect('dashboard')
+        else:
+            print("no fields")
+            return HttpResponseRedirect('dashboard')
+    else:
+        db = firestore.client()
+        courses_doc = db.collection("courses").get()
+        cats = []
+        for i in courses_doc:
+            cats.append(i.id)
+        return render(request, 'course_add.html', {
+            'category': cats
+        })
 
 
 def show_category(request):
@@ -151,7 +215,7 @@ def add_service(request):
             d.set({
                 "about": data['about'],
                 "category_id": data['category_id'],
-               
+
                 "image": url_list,
                 "district_id": data['district_id'],
                 "grade_id": data['grade_id'],
@@ -162,7 +226,7 @@ def add_service(request):
                 "university": data['university'],
                 "name": data['name'],
                 "number": data['number'],
-               
+
                 "id": d.id,
                 "urls": data['urls']
             })
@@ -297,7 +361,7 @@ def delete_service(request):
     db = firestore.client()
     db.collection('indian_college').document(cat_id).delete()
     return HttpResponseRedirect('service')
-    
+
 
 def show_banner(request):
     fs = firestore.client()

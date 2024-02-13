@@ -5,14 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="keywords"
-      content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Matrix lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Matrix admin lite design, Matrix admin lite dashboard bootstrap 5 dashboard template"
-    />
-    <meta
-      name="description"
-      content="Matrix Admin Lite Free Version is powerful and clean admin dashboard template, inpired from Bootstrap Framework"
-    />
+
     <meta name="robots" content="noindex,nofollow" />
     <title>Edhunt Admin</title>
     <!-- Favicon icon -->
@@ -23,25 +16,45 @@
       href="static/assets/logo.png"
     />
     <!-- Custom CSS -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="static/assets/extra-libs/multicheck/multicheck.css"
-    />
-    <link
-      href="static/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.css"
-      rel="stylesheet"
-    />
     <link href="static/dist/css/style.min.css" rel="stylesheet" />
-    <link href="static/dist/css/index.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+     <script>
+    function addBanner (){
+    let cookie = document.cookie
+    let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
+    var image = document.getElementsByName("image")[0].files[0];
+    var name = document.getElementsByName("name")[0].value;
+    var catId = "";
+    var category = document.getElementsByName("category")[0];
+    catId = category.options[category.selectedIndex].id;
+    var formData = new FormData();
+    formData.append('image', image);
+    formData.append('cat', catId);
+    formData.append('name', name);
+         $.ajax({
+      url: "course_add",
+      type: "POST",
+      data: formData,
+      headers: { 'X-CSRFToken': csrfToken },
+      processData: false,
+      contentType: false,
+      success: function(response) {
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.error("Error:", errorThrown);
+      }
+
+    });
+    window.location.replace('dashboard');
+    }
+    </script>
   </head>
 
   <body>
@@ -77,19 +90,17 @@
             <!-- ============================================================== -->
             <a class="navbar-brand" href="index.html">
               <!-- Logo icon -->
-
               <b class="logo-icon ps-0">
 
                 <div style="display: flex;">
-                  <img src="static/assets/logo.png" alt="homepage" class="light-logo" width="60" height="40"/>
+                  <img src="static/assets/logo.png" alt="homepage" class="light-logo" width="60" height="40" />
                   <h5 style="margin-top: 15px;">Edhunt Admin</h5>
                 </div>
 
               </b>
+              <!--End Logo icon -->
+              <!-- Logo text -->
             </a>
-            <!-- ============================================================== -->
-            <!-- End Logo -->
-            <!-- ============================================================== -->
             <!-- ============================================================== -->
             <!-- Toggle which is visible on mobile only -->
             <!-- ============================================================== -->
@@ -120,7 +131,6 @@
                 ></a>
               </li>
               <!-- ============================================================== -->
-              <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
               <!-- <li class="nav-item search-box">
@@ -139,14 +149,6 @@
                 </form>
               </li> -->
             </ul>
-            <!-- ============================================================== -->
-            <!-- Right side toggle and nav items -->
-            <!-- ============================================================== -->
-            <ul class="navbar-nav float-end">
-              <!-- ============================================================== -->
-
-
-
               <!-- ============================================================== -->
               <!-- User profile and search -->
               <!-- ============================================================== -->
@@ -179,12 +181,10 @@
                   <a class="dropdown-item" href="javascript:void(0)"
                     ><i class="mdi mdi-account me-1 ms-1"></i> My Profile</a
                   >
-
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" href="javascript:void(0)"
                     ><i class="fa fa-power-off me-1 ms-1"></i> Logout</a
                   >
-
                 </ul>
               </li>
               <!-- ============================================================== -->
@@ -215,6 +215,7 @@
                   ><span class="hide-menu">Dashboard</span></a
                 >
               </li>
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -253,15 +254,7 @@
                   ><span class="hide-menu">Manage Districts</span></a
                 >
               </li>
-         <li class="sidebar-item">
-                <a
-                  class="sidebar-link waves-effect waves-dark sidebar-link"
-                  href="grade"
-                  aria-expanded="false"
-                  ><i class="mdi mdi-pencil"></i
-                  ><span class="hide-menu">Manage Grade</span></a
-                >
-              </li>
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -271,8 +264,6 @@
                   ><span class="hide-menu">Manage Users</span></a
                 >
               </li>
-
-
 
             </ul>
           </nav>
@@ -293,11 +284,11 @@
         <div class="page-breadcrumb">
           <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
-              <h4 class="page-title">Courses</h4>
+              <h4 class="page-title">Course Add</h4>
               <div class="ms-auto text-end">
                 <nav aria-label="breadcrumb">
                   <!-- <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">
                       Library
                     </li>
@@ -317,134 +308,122 @@
           <!-- ============================================================== -->
           <!-- Start Page Content -->
           <!-- ============================================================== -->
+
+          <!-- drop down -->
           <div class="row">
             <div class="col-12">
-
               <div class="card">
                 <div class="card-body">
-                  <!-- <h5 class="card-title">Basic Datatable</h5> -->
-                  <div class="table-container">
-                    <div class="table-title">
-                     <h2 class="table-font">Courses List</h2>
-                    </div>
-                    <div>
-                      <a href="course_add"> <button type="button" class="btn btn-primary">
-                            Add
-                          </button> </a>
-                    </div>
-                  </div>
+                  <!-- <h5 class="card-title">Dropdown Buttons</h5> -->
+                  <div class="bd-example">
 
-                  <div class="table-responsive">
-                    <table
-                      id="zero_config"
-                      class="table table-striped table-bordered"
-                    >
-                      <thead>
-                        <tr>
-                          <th>Category Name</th>
-                          <th>Name</th>
-                          <th>Url</th>
-                           <th>Delete</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      {% for i in course_list %}
-                        <tr>
-                          <td>{{ i.cat }}</td>
-                          <td>{{ i.name }}</td>
-                          <td>{{ i.url }}</td>
-                           <td>
-                             <a href="javascript:void(0);" onclick="showConfirmationPopup('{{ i.id }}','{{ i.cat }}')"><i class="fas fa-trash delete-icon" title="Delete"></i></a>
-                          </td>
-                        </tr>
-                      {% endfor %}
-                      </tbody>
-                    </table>
+                    <!-- Banner Add-->
+                    <div class="row">
+                        <div class="col-md-6">
+                          <div class="card">
+                            <form class="form-horizontal">
+                              <div class="card-body">
+                                <h4 class="card-title" style="padding-bottom: 12px;">Manage Course Add</h4>
+                                    <div class="form-group row">
+                              <label class="col-md-3 mt-3">Select Category</label>
+                              <div class="col-md-9">
+                                <select class="select2 form-select shadow-none" style="width: 100%; height: 36px"
+                                  name='category'>
+                                  <optgroup label="Select Catgegory Name">
+                                    {% for i in category %}
+                                    <option value="{{ i }}" id="{{ i }}">{{ i }}</option>
+                                    {% endfor %}
+                                  </optgroup>
+
+                                </select>
+                              </div>
+                            </div>
+     <div class="form-group row">
+                              <label for="fname" class="col-sm-3 text-end control-label col-form-label">Course
+                                Name</label>
+                              <div class="col-sm-9">
+                                <input type="text" class="form-control" id="categoryname" name="name"
+                                  placeholder="Course Name Here" />
+                              </div>
+                            </div>
+
+                                <div class="form-group row">
+                                    <label
+                                      for="fname"
+                                      class="col-sm-3 text-end control-label col-form-label"
+                                      >Course PDF</label
+                                    >
+                                    <div class="col-sm-9">
+                                        <input
+                                        type="file"
+                                        class="custom-file-input"
+                                        id="validatedCustomFile"
+                                        name="image"
+                                        required
+                                      />
+                                    </div>
+                                  </div>
+
+
+                            </div>
+
+                              <div class="border-top">
+                                <div class="card-body" style="float: right;">
+                                  <button type="button" class="btn btn-primary" onclick="addBanner()">
+                                    Submit
+                                  </button>
+                                 <a href="banner"> <button type="button" class="btn btn-secondary">
+                                    Cancel
+                                  </button> </a>
+                                </div>
+                              </div>
+
+                            </form>
+                          </div>
+                        </div>
+                        </div>
+                    <!--Banner Add End-->
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
-              <!-- Popup for confirmation -->
-    <div id="confirmationPopup" class="popup">
-      <div class="popup-content">
-          <p>Are you sure you want to delete?</p>
-          <div class="popup-buttons">
-              <button type="button" class="btn btn-primary" onclick="confirmDelete()">
-                OK
-              </button>
-              <button type="button" class="btn btn-danger text-white" onclick="cancelDelete()">
-                Cancel
-              </button>
-          </div>
-      </div>
-  </div>
-
         </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
         <footer class="footer text-center">
           All Rights Reserved by © Edhunt. Designed and Developed by Bytevurx IT Solutions.
           <a href="https:bytevurx.co.in" target="_blank"> Bytevurx</a>.
         </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
       </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
     </div>
-
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
     <script src="static/assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
     <script src="static/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
     <script src="static/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
     <script src="static/assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
     <script src="static/dist/js/waves.js"></script>
+    <!--Menu sidebar -->
     <script src="static/dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
     <script src="static/dist/js/custom.min.js"></script>
-    <script src="static/assets/extra-libs/multicheck/datatable-checkbox-init.js"></script>
-    <script src="static/assets/extra-libs/multicheck/jquery.multicheck.js"></script>
-    <script src="static/assets/extra-libs/DataTables/datatables.min.js"></script>
-    <script>
-
-      $("#zero_config").DataTable();
-    </script>
-
-<script>
-  function showConfirmationPopup(id, cat) {
-      var popup = document.getElementById("confirmationPopup");
-      popup.style.display = "block";
-       popup.dataset.id = id;
-        popup.dataset.cat = cat;
-  }
-
-  function cancelDelete() {
-      var popup = document.getElementById("confirmationPopup");
-      popup.style.display = "none";
-  }
-
-  function confirmDelete() {
-      // Handle the delete action here
-      var popup = document.getElementById("confirmationPopup");
-          // Handle the delete action here
-        var id = popup.dataset.id;
-        var cat = popup.dataset.cat;
-        var formData = new FormData();
-        let cookie = document.cookie
-        let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
-        formData.append('id', id);
-        formData.append('cat', cat);
-         $.ajax({
-             url: "course_delete",
-             type: "POST",
-             data: formData,
-             headers: { 'X-CSRFToken': csrfToken },
-             processData: false,
-             contentType: false,
-             success: function(response) {
-                       location.reload();
-             },
-             error: function(jqXHR, textStatus, errorThrown) {
-               console.error("Error:", errorThrown);
-             }
-         });
-      popup.style.display = "none";
-  }
-</script>
-
   </body>
 </html>
