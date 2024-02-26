@@ -589,3 +589,12 @@ def show_user(request):
     for i in users_doc:
         users.append(i.to_dict())
     return render(request, 'users.html', {"user_list": users})
+
+def register_business(request):
+    return render(request, 'business.html')
+
+def scholarship(request):
+    return render(request, 'scholarship.html')
+
+def withdrawl_request(request):
+    return render(request, 'withdrawl.html')
