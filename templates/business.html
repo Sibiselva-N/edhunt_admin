@@ -307,7 +307,7 @@
                   <table id="zero_config" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>University</th>
+                        <th>Business Name</th>
                         <th>Number</th>
                         <th>Name</th>
                         <th>District</th>
@@ -315,10 +315,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {% for i in services %}
+                      {% for i in bus %}
                       <tr>
-                        <td>{{ i.university }}</td>
-                        <td>{{ i.number }}</td>
+                        <td>{{ i.business_name }}</td>
+                        <td>{{ i.mobile }}</td>
                         <td>{{ i.name }}</td>
                         <td>{{ i.district }}</td>
                         <td>

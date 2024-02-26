@@ -307,20 +307,20 @@
                   <table id="zero_config" class="table table-striped table-bordered">
                     <thead>
                       <tr>
-                        <th>University</th>
+                        <th>Qualification</th>
                         <th>Number</th>
                         <th>Name</th>
-                        <th>District</th>
+                        <th>Address</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {% for i in services %}
+                      {% for i in sc %}
                       <tr>
-                        <td>{{ i.university }}</td>
+                        <td>{{ i.qualification }}</td>
                         <td>{{ i.number }}</td>
                         <td>{{ i.name }}</td>
-                        <td>{{ i.district }}</td>
+                        <td>{{ i.address }}</td>
                         <td>
                           <a href="{% url 'service_edit' %}?id={{ i.id }}"><i class="fas fa-edit edit-icon"
                               title="Edit"></i></a>

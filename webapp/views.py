@@ -590,11 +590,42 @@ def show_user(request):
         users.append(i.to_dict())
     return render(request, 'users.html', {"user_list": users})
 
+
 def register_business(request):
-    return render(request, 'business.html')
+    fs = firestore.client()
+    bus_doc = fs.collection("business").get()
+    busin = []
+    for i in bus_doc:
+        busin.append(i.to_dict())
+    return render(request, 'business.html', {"bus": busin})
+
 
 def scholarship(request):
-    return render(request, 'scholarship.html')
+    fs = firestore.client()
+    sco_doc = fs.collection("scolar").get()
+    scolar = []
+    for i in sco_doc:
+        scolar.append(i.to_dict())
+    return render(request, 'scholarship.html', {"sc": scolar})
+
 
 def withdrawl_request(request):
-    return render(request, 'withdrawl.html')
+    fs = firestore.client()
+    sco_doc = fs.collection("withdraw").get()
+    scolar = []
+    for i in sco_doc:
+        scolar.append(i.to_dict())
+    return render(request, 'withdrawl.html', {"with": scolar})
+
+
+def update_status(request):
+    status = request.GET.get('id', "")
+    db = firestore.client()
+    db.collection('withdraw').document(status).update({
+        "status":True
+    })
+    sco_doc = db.collection("withdraw").get()
+    scolar = []
+    for i in sco_doc:
+        scolar.append(i.to_dict())
+    return render(request, 'withdrawl.html', {"with": scolar})

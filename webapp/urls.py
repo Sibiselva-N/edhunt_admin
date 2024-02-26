@@ -2,7 +2,8 @@ from django.urls import path
 from .views import show_dashboard, show_category, show_service, show_banner, show_district, edit_district, add_district, \
     show_user, \
     add_service, edit_service, add_category, edit_category, delete_category, add_banner, edit_banner, delete_service, \
-    delete_banner, delete_district, delete_grade, edit_grade, add_grade, show_grade, edit_user, delete_course, add_course,register_business,withdrawl_request,scholarship
+    delete_banner, delete_district, delete_grade, edit_grade, add_grade, show_grade, edit_user, delete_course, \
+    add_course, register_business, withdrawl_request, scholarship, update_status
 
 urlpatterns = [
     path('dashboard', show_dashboard),
@@ -37,7 +38,8 @@ urlpatterns = [
 
     path('business', register_business),
     path('scholarship', scholarship),
-    path('withdrawl', withdrawl_request)
+    path('withdrawl', withdrawl_request),
+    path('withdraw_update', update_status, name='withdraw_update'),
 
 
 ]
